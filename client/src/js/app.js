@@ -11,6 +11,12 @@ define(['LibCanvas', 'atom'], function (LibCanvas, atom) {
         size: new LibCanvas.Size(width, height)
       });
       
+      var mouse = new LibCanvas.Mouse(this.canvasApp.container.bounds);
+      
+      this.mouseHandler = new LibCanvas.App.MouseHandler({
+  			mouse: mouse, app: this.canvasApp
+  		});
+      
       this.events = new atom.Events();
     },
     
