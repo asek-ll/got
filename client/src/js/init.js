@@ -2,7 +2,8 @@
 require.config({
   paths: {
     'LibCanvas': '../lib/libcanvas/libcanvas-full-compiled',
-    'atom': '../lib/atomjs/atom-full-compiled'
+    'atom': '../lib/atomjs/atom-full-compiled',
+    'zonesdata': '../../zones/zones'
   },
   shim: {
     'LibCanvas': {

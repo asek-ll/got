@@ -1,0 +1,14 @@
+define(function(){
+    var zones = [
+    <% zones.forEach(function(zone) { %>
+      {
+        id: "<%- zone.id -%>",
+        coords:[
+          <% zone.coords.forEach(function(coord) { %>
+          [<%- coord[0] %>, <%- coord[1] %>], <% }); %> ]
+      },
+    <% }); %>
+    ];
+
+  return zones;
+});
