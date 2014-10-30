@@ -28,6 +28,16 @@ module.exports = function(grunt) {
       }
     }
   });
+  
+  grunt.registerTask('buildZones', 'bz', function () {
+    var done = this.async();
+    
+    var zoneGenerator = require('./resources/zones/builder.js');
+    zoneGenerator('./src/resources/zones/zones.js', function () {
+      done();
+    });
+    
+  });
 
   grunt.registerTask('install', ['bower']);
   grunt.registerTask('compile', ['requirejs']);
