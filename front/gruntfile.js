@@ -3,6 +3,9 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
+      clean: {
+          dist: ['dist']
+      },
     wiredep: {
       task: {
         src: [
@@ -18,7 +21,8 @@ module.exports = function(grunt) {
         dest: 'dist',
         flow: {
           steps: {
-            js: ['concat', 'uglifyjs']
+            js: ['concat', 'uglifyjs'],
+            css: ['concat']
           },
       post: {}
     }
@@ -36,6 +40,7 @@ module.exports = function(grunt) {
   });
   
  grunt.registerTask('min',[
+     'clean',
      'copy',
  'useminPrepare',
   'concat:generated',
