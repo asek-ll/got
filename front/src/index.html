@@ -10,7 +10,7 @@
     <!-- endbuild -->
   </head>
   <body ng-app="tg">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="ToolbarCtrl">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -26,6 +26,8 @@
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li ng-if="isLoggedIn"><a href="#me">Wellcam {{currentUser.name}}</a></li>
+          <li ng-if="!isLoggedIn"><a href="/user/login">Login</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -52,7 +54,8 @@
     <!-- build:js ./app.js -->
     <script src="app/app.js"></script>
     <script src="app/controllers/main.js"></script>
-    <script src="app/controllers/second.js"></script>
+    <script src="app/controllers/toolbar.js"></script>
+    <script src="app/services/auth.js"></script>
     <!-- endbuild -->
     
   </body>
