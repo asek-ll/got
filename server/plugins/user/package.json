@@ -1,15 +1,14 @@
 {
-  "name": "server",
+  "name": "user",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "user.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.10.1",
-    "express.io": "^1.1.13"
+  "plugin": {
+    "consumes": ["server"]
   }
 }

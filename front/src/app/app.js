@@ -1,4 +1,5 @@
 /* global angular */
 angular.module('tg', [
-  'ngRoute'
+    'ngRoute',
+    'btford.socket-io'
 ]);
