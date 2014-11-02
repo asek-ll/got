@@ -17,5 +17,6 @@
     "grunt-usemin": "^2.5.1",
     "grunt-wiredep": "^1.9.0",
     "load-grunt-tasks": "^1.0.0"
-  }
+  },
+  "dependencies": {}
 }

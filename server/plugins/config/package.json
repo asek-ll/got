@@ -1,0 +1,11 @@
+{
+    "name": "config",
+    "version": "0.0.1",
+    "main": "config.coffee",
+    "private": true,
+
+    "plugin": {
+        "provides": ["config"],
+        "consumes": []
+    }
+}

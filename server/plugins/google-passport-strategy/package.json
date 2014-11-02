@@ -1,14 +1,14 @@
 {
-  "name": "user",
+  "name": "google-passport-strategy",
   "version": "0.0.0",
   "description": "",
-  "main": "user.coffee",
+  "main": "strategy.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "plugin": {
-    "consumes": ["server", "google-strategy"]
+    "provides": ["google-strategy"]
   }
 }

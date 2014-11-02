@@ -9,7 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "architect": "^0.1.11",
     "express": "^4.10.1",
-    "express.io": "^1.1.13"
+    "express.io": "^1.1.13",
+    "lodash": "^2.4.1",
+    "passport": "^0.2.1"
   }
 }
