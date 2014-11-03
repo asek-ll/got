@@ -1,16 +1,13 @@
 module.exports = (options, imports, register) ->
-    EXAMPLE_CLIENT_ID = ''
-    EXAMPLE_CLIENT_SECRET = ''
-
     server = imports.server
     googleStrategy = imports['google-strategy']
 
     passport = require 'passport'
 
     oAuth2Strategy = googleStrategy
-      clientID: EXAMPLE_CLIENT_ID
-      clientSecret: EXAMPLE_CLIENT_SECRET
-      callbackURL: 'http://localhost:3000/auth/google/return'
+      clientID: options.clientID
+      clientSecret: options.clientSecret
+      callbackURL: options.callbackURL
     , (accessToken, refreshToken, profile, done) ->
       console.log profile
       done null, {}

@@ -17,19 +17,18 @@ module.exports = (options, imports, register) ->
     use = ->
       app.use.apply app, arguments
 
-    start = () ->
+    start = ->
     
-        app.use('/dev', express.static(path.join(options.root, '/src')))
-        app.use(express.static(path.join(options.root, '/dist')))
-        
-        app.use(router)
-        
-        console.log process.env.PORT || 3000, process.env.IP || "0.0.0.0"
-        app.listen process.env.PORT || 3000, process.env.IP || "0.0.0.0", () ->
-            console.log "start"
-    
+      app.use('/dev', express.static(path.join(options.root, '/src')))
+      app.use(express.static(path.join(options.root, '/dist')))
+
+      app.use router
+
+      app.listen options.port, options.ip, ->
+          console.log "server available at" + options.hostname
+
     register null,
-        server:
-            start: start
-            router: router
-            use: use
+      server:
+        start: start
+        router: router
+        use: use
