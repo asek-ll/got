@@ -11,9 +11,15 @@ module.exports = [
     clientID: ''
     clientSecret: ''
     callbackURL: 'http://localhost:3000/auth/google/return'
+    cookieSecret: ''
+    allowedEmails: []
   }
   {
     packagePath:'./plugins/google-passport-strategy'
+  }
+  {
+    packagePath:'./plugins/mongodb'
+    uri: ''
   }
 
 ]

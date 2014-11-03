@@ -11,7 +11,13 @@ module.exports = (options, imports, register) ->
 
     oAuth2Strategy.userProfile = (accessToken, done) ->
       oAuth2Strategy._oauth2.get 'https://www.googleapis.com/oauth2/v1/userinfo', accessToken, (err, data, res)->
-        done err, data
+
+        try
+          parsed = JSON.parse data
+        catch ex
+          return done err, {}
+
+        done err, parsed
 
     oAuth2Strategy
 

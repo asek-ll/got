@@ -1,14 +1,11 @@
 {
-  "name": "user",
+  "name": "game",
   "version": "0.0.0",
   "description": "",
-  "main": "user.coffee",
+  "main": "game.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "plugin": {
-    "consumes": ["server", "google-strategy", "mongodb"]
-  }
+  "license": "BSD-2-Clause"
 }
