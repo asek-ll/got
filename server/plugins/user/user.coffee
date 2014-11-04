@@ -41,6 +41,7 @@ module.exports = (options, imports, register) ->
       done null, user._id
 
     passport.deserializeUser (id, done) ->
+      #console.trace "try to deserialize", id
       User.findById id, done
 
     server.use session
@@ -53,16 +54,14 @@ module.exports = (options, imports, register) ->
     server.use passport.initialize()
 
     server.use passport.session()
-
+    
     server.router.get('/auth/google', passport.authenticate('oauth2'))
 
     server.router.get('/auth/google/return', passport.authenticate('oauth2', { successRedirect: '/', failureRedirect: '/login' }))
-    #server.router.get '/auth/google/return', (req, res, next) ->
-      #console.log req
-      #next()
     
     server.router.get '/user', (req, res, next) ->
       res.json req.user
     
     register null,
-      user: User
+      user: 
+        model: User

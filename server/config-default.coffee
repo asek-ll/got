@@ -21,5 +21,7 @@ module.exports = [
     packagePath:'./plugins/mongodb'
     uri: ''
   }
-
+  {
+    packagePath: './plugins/roles'
+  }
 ]

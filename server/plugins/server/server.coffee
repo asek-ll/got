@@ -14,18 +14,19 @@ module.exports = (options, imports, register) ->
         #console.log 'broad'
     #), 5000
 
+    app.use('/dev', express.static(path.join(options.root, '/src')))
+    app.use(express.static(path.join(options.root, '/dist')))
+
     use = ->
       app.use.apply app, arguments
 
     start = ->
     
-      app.use('/dev', express.static(path.join(options.root, '/src')))
-      app.use(express.static(path.join(options.root, '/dist')))
 
       app.use router
 
       app.listen options.port, options.ip, ->
-          console.log "server available at" + options.hostname
+          console.log "server available at " + options.hostname
 
     register null,
       server:

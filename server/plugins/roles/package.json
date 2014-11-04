@@ -1,15 +1,14 @@
 {
-  "name": "user",
+  "name": "roles",
   "version": "0.0.0",
   "description": "",
-  "main": "user.coffee",
+  "main": "roles.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "plugin": {
-    "consumes": ["server","mongodb","google-strategy"],
-    "provides": ["user"]
+    "consumes": ["server", "user"]
   }
 }
