@@ -42,7 +42,11 @@ module.exports = (options, imports, register) ->
 
     passport.deserializeUser (id, done) ->
       #console.trace "try to deserialize", id
-      User.findById id, done
+      User.findById id, (err, user) ->
+        if user
+          done err, user.toObject()
+        else
+          done err, {}
 
     server.use session
       secret: options.cookieSecret

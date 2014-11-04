@@ -28,7 +28,7 @@
           <li><a href="#about">About</a></li>
           <li ng-class="{ active: isActive('/games')}"><a href="/games">Games list</a></li>
           <li ng-if="isLoggedIn"><a href="#me">Wellcam {{currentUser.name}}</a></li>
-          <li ng-if="!isLoggedIn"><a href="auth/google">Login</a></li>
+          <li ng-if="!isLoggedIn"><a href="/auth/google" target="_self">Login</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>

@@ -7,10 +7,10 @@ angular.module('tg').controller('ToolbarCtrl', ['$scope', 'AuthService', '$locat
       $scope.isLoggedIn = isLoggedIn;
       $scope.currentUser = AuthService.currentUser();
     });
-    
-    $scope.isActive = function (viewLocation) { 
-        return viewLocation === $location.path();
-    };
 
+    $scope.isActive = function(viewLocation) {
+      return viewLocation === $location.path();
+    };
+    
   }
 ]);

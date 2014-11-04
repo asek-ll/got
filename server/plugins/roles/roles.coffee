@@ -25,6 +25,9 @@ module.exports = (options, imports, register) ->
     
     req.hasPerm = (perm) ->
       perms.indexOf(perm) >= 0
+      
+    if req.user
+      req.user.perms = perms
     
     next() 
     

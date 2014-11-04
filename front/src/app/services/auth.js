@@ -18,7 +18,6 @@ angular.module('tg').factory('AuthService', ['$http',
 
     return {
       login: function(user) {
-        currentUser = user;
       },
       logout: function() {},
       isLoggedIn: function() {
