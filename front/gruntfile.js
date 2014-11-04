@@ -16,7 +16,7 @@ module.exports = function(grunt) {
             main: 'socket.min.js'
           }
         },
-        options: { }
+        options: {}
       }
     },
     useminPrepare: {
@@ -32,18 +32,29 @@ module.exports = function(grunt) {
         }
       }
     },
-    copy:{
+    copy: {
       html: {
-        src: 'src/index.html', dest: 'dist/index.html'
+        src: 'src/index.html',
+        dest: 'dist/index.html'
       }
     },
     usemin: {
       html: ['dist/index.html']
-    }
+    },
+    html2js: {
+      options: {
+        // custom options, see below
+      },
+      main: {
+        src: ['src/**/*.tpl.html'],
+        dest: 'src/partials/templates.js'
+      },
+    },
   });
 
   grunt.registerTask('min', [
     'clean',
+    'html2js',
     'copy',
     'useminPrepare',
     'concat:generated',

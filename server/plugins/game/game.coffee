@@ -5,7 +5,12 @@ module.exports = (options, imports, register) ->
 
   Game = (require __dirname + '/schema.coffee')(mongodb.mongoose)
 
-  server.router.route('/games').get (req, res, next) ->
-    if req.hasPerm "view games"
+  server.router.get '/api/games', (req, res) ->
+    res.json []
+    
+  server.router.route '/api/games/:id'
+  .get (req, res) ->
+    res.json {}
       
       
+  register null, {}
