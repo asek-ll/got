@@ -23,7 +23,7 @@ module.exports = [
   }
   {
     packagePath: './plugins/roles'
-  } 
+  }
   {
     packagePath: './plugins/game'
   }

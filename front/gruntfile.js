@@ -11,11 +11,6 @@ module.exports = function(grunt) {
         src: [
           'src/index.html'
         ],
-        overrides: {
-          'angular-socket-io': {
-            main: 'socket.min.js'
-          }
-        },
         options: {}
       }
     },
