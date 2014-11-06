@@ -15,6 +15,12 @@ module.exports = (options, imports, register) ->
     #), 5000
 
     app.use(express.static(path.join(options.root, '/src')))
+    
+    bodyParser = require 'body-parser'
+    app.use bodyParser.json()
+    app.use bodyParser.urlencoded
+      extended: true
+      
     #app.use('/dev', express.static(path.join(options.root, '/src')))
     #app.use(express.static(path.join(options.root, '/dist')))
 

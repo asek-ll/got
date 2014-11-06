@@ -5,8 +5,12 @@ module.exports = (options, imports, register) ->
 
   Game = (require __dirname + '/schema.coffee')(mongodb.mongoose)
 
-  server.router.get '/api/games', (req, res) ->
+  server.router.route '/api/games'
+  .get (req, res) ->
     res.json []
+  .post (req, res, next) ->
+    game = req.body
+    console.log game.name
     
   server.router.route '/api/games/:id'
   .get (req, res) ->

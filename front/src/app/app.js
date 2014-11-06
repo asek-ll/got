@@ -12,6 +12,9 @@ angular.module('tg', [
     $routeProvider.when('/games', {
       templateUrl: 'partials/game-list.tpl.html',
       controller: 'GameCtrl'
+    }).when('/games/new', {
+      templateUrl: 'partials/game-form.tpl.html',
+      controller: 'GameFormCtrl'
     }).when('/', {
       templateUrl: 'partials/home.tpl.html',
       controller: 'MainCtrl'
