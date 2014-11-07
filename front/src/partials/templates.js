@@ -30,7 +30,22 @@ angular.module("partials/game-form.tpl.html", []).run(["$templateCache", functio
 angular.module("partials/game-list.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("partials/game-list.tpl.html",
     "<a href=\"games/new\">Create game</a>\n" +
-    "<strong>GAME LIST HERE</strong>");
+    "<strong>GAME LIST HERE</strong>\n" +
+    "<table class=\"table\">\n" +
+    "  <thead>\n" +
+    "    <tr>\n" +
+    "      <th>Id</th>\n" +
+    "      <th>name</th>\n" +
+    "    </tr>\n" +
+    "  </thead>\n" +
+    "  <tbody>\n" +
+    "    <tr ng-repeat=\"game in games\">\n" +
+    "      <td ng-bind=\"game._id\"></td>\n" +
+    "      <td ng-bind=\"game.name\"></td>\n" +
+    "    </tr>\n" +
+    "  </tbody>\n" +
+    "</table>\n" +
+    "");
 }]);
 
 angular.module("partials/home.tpl.html", []).run(["$templateCache", function($templateCache) {
