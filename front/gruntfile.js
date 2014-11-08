@@ -12,12 +12,16 @@ module.exports = function(grunt) {
           'src/index.html'
         ],
         options: {}
+      },
+      dist: {
+        src: [
+          'dist/index.html'
+        ],
       }
     },
     useminPrepare: {
-      html: 'src/index.html',
+      html: 'dist/index.html',
       options: {
-        dest: 'dist',
         flow: {
           steps: {
             js: ['concat', 'uglifyjs'],
@@ -44,7 +48,24 @@ module.exports = function(grunt) {
         src: ['src/**/*.tpl.html'],
         dest: 'src/partials/templates.js'
       },
+      dist: {
+        src: ['src/**/*.tpl.html'],
+        dest: 'dist/templates.js'
+      }
     },
+    injector: {
+      dist: {
+        files: {
+          'dist/index.html': [
+            [
+              'src/app/**/*.js',
+              'dist/templates.js'
+            ],
+            'src/css/**/*.css'
+          ],
+        },
+      }
+    }
   });
 
   grunt.registerTask('min', [
@@ -56,5 +77,26 @@ module.exports = function(grunt) {
     'uglify:generated',
     'usemin'
   ]);
+
+  grunt.registerTask('dev', [
+    'clean',
+    'html2js:dist',
+    'copy',
+    'wiredep:dist',
+    'injector:dist',
+  ]);
+
+  grunt.registerTask('rel', [
+    'clean',
+    'html2js:dist',
+    'copy',
+    'wiredep:dist',
+    'injector:dist',
+    'useminPrepare',
+    'concat:generated',
+    'uglify:generated',
+    'usemin'
+  ]);
+
 
 };
