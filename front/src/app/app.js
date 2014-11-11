@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('tg', [
-  'templates-main',
+  //'templates-main',
   'ngRoute',
   'btford.socket-io',
   'ngResource'
@@ -10,13 +10,13 @@ angular.module('tg', [
     $locationProvider.html5Mode(true).hashPrefix('!');
 
     $routeProvider.when('/games', {
-      templateUrl: 'partials/game-list.tpl.html',
+      templateUrl: 'views/game-list.tpl.html',
       controller: 'GameCtrl'
     }).when('/games/new', {
-      templateUrl: 'partials/game-form.tpl.html',
+      templateUrl: 'views/game-form.tpl.html',
       controller: 'GameFormCtrl'
     }).when('/', {
-      templateUrl: 'partials/home.tpl.html',
+      templateUrl: 'views/home.tpl.html',
       controller: 'MainCtrl'
     }).otherwise({
       redirectTo: '/'

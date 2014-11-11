@@ -3,15 +3,20 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
+    watch: {
+      templates: {
+        files: ['src/app/**/*.tpl.html'],
+        tasks: ['html2js:main']
+      }
+    },
     clean: {
       dist: ['dist']
     },
     wiredep: {
-      task: {
+      src: {
         src: [
           'src/index.html'
         ],
-        options: {}
       },
       dist: {
         src: [
@@ -45,8 +50,8 @@ module.exports = function(grunt) {
         // custom options, see below
       },
       main: {
-        src: ['src/**/*.tpl.html'],
-        dest: 'src/partials/templates.js'
+        src: ['src/app/**/*.tpl.html'],
+        dest: 'src/templates/app.js'
       },
       dist: {
         src: ['src/**/*.tpl.html'],
@@ -54,6 +59,21 @@ module.exports = function(grunt) {
       }
     },
     injector: {
+      options: {
+        ignorePath: ['src'],
+        addRootSlash: false
+      },
+      src: {
+        files: {
+          'src/index.html': [
+            [
+              'src/app/**/*.js',
+              'src/templates/*.js'
+            ],
+            'src/css/**/*.css'
+          ],
+        }
+      },
       dist: {
         files: {
           'dist/index.html': [
@@ -79,11 +99,10 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('dev', [
-    'clean',
-    'html2js:dist',
-    'copy',
-    'wiredep:dist',
-    'injector:dist',
+    'html2js:main',
+    'wiredep:src',
+    'injector:src',
+    'watch'
   ]);
 
   grunt.registerTask('rel', [
@@ -97,6 +116,5 @@ module.exports = function(grunt) {
     'uglify:generated',
     'usemin'
   ]);
-
 
 };

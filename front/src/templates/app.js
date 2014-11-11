@@ -1,7 +1,7 @@
-angular.module('templates-main', ['partials/game-form.tpl.html', 'partials/game-list.tpl.html', 'partials/home.tpl.html']);
+angular.module('templates-main', ['app/views/game-form.tpl.html', 'app/views/game-list.tpl.html', 'app/views/home.tpl.html']);
 
-angular.module("partials/game-form.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("partials/game-form.tpl.html",
+angular.module("app/views/game-form.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("app/views/game-form.tpl.html",
     "<form role=\"form\" name=\"form\">\n" +
     "  <div class=\"form-group\">\n" +
     "    <label for=\"gameName\">Game name</label>\n" +
@@ -27,8 +27,8 @@ angular.module("partials/game-form.tpl.html", []).run(["$templateCache", functio
     "</form>");
 }]);
 
-angular.module("partials/game-list.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("partials/game-list.tpl.html",
+angular.module("app/views/game-list.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("app/views/game-list.tpl.html",
     "<a href=\"games/new\">Create game</a>\n" +
     "<strong>GAME LIST HERE</strong>\n" +
     "<table class=\"table\">\n" +
@@ -48,8 +48,8 @@ angular.module("partials/game-list.tpl.html", []).run(["$templateCache", functio
     "");
 }]);
 
-angular.module("partials/home.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("partials/home.tpl.html",
+angular.module("app/views/home.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("app/views/home.tpl.html",
     "<div class=\"starter-template\">\n" +
     "        <h1>Bootstrap starter template</h1>\n" +
     "        <p class=\"lead\">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>\n" +
