@@ -8,8 +8,11 @@ module.exports = (options, imports, register) ->
     mongoose.connect options.uri,
       server:
         auto_reconnect: true
-    #console.log mongoose
-    #console.log db
+    , (err) ->
+      register err,
+        mongodb:
+          connection: db
+          mongoose: mongoose
 
   db.on 'connectiong', ->
     console.log 'connect to mongodb'
@@ -30,7 +33,3 @@ module.exports = (options, imports, register) ->
 
   connect()
 
-  register null,
-    mongodb:
-      connection: db
-      mongoose: mongoose

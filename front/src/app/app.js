@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('tg', [
-  //'templates-main',
+  'templates-main',
   'ngRoute',
   'btford.socket-io',
   'ngResource'
@@ -15,6 +15,9 @@ angular.module('tg', [
     }).when('/games/new', {
       templateUrl: 'views/game-form.tpl.html',
       controller: 'GameFormCtrl'
+    }).when('/me', {
+      templateUrl: 'views/user.tpl.html',
+      controller: 'UserCtrl'
     }).when('/', {
       templateUrl: 'views/home.tpl.html',
       controller: 'MainCtrl'

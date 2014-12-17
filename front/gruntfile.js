@@ -25,7 +25,7 @@ module.exports = function(grunt) {
       }
     },
     useminPrepare: {
-      html: 'dist/index.html',
+      html: 'src/index.html',
       options: {
         flow: {
           steps: {
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
     },
     html2js: {
       options: {
-        // custom options, see below
+        base: 'src/app'
       },
       main: {
         src: ['src/app/**/*.tpl.html'],
@@ -67,23 +67,12 @@ module.exports = function(grunt) {
         files: {
           'src/index.html': [
             [
-              'src/app/**/*.js',
-              'src/templates/*.js'
+              'src/templates/*.js',
+              'src/app/**/*.js'
             ],
             'src/css/**/*.css'
           ],
         }
-      },
-      dist: {
-        files: {
-          'dist/index.html': [
-            [
-              'src/app/**/*.js',
-              'dist/templates.js'
-            ],
-            'src/css/**/*.css'
-          ],
-        },
       }
     }
   });
@@ -109,8 +98,8 @@ module.exports = function(grunt) {
     'clean',
     'html2js:dist',
     'copy',
-    'wiredep:dist',
-    'injector:dist',
+    'wiredep:src',
+    'injector:src',
     'useminPrepare',
     'concat:generated',
     'uglify:generated',

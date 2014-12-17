@@ -53,7 +53,7 @@ module.exports = (options, imports, register) ->
       resave: false
       saveUninitialized: true
       store: new MongoStore
-        mongoose_connection: mongodb.connection
+        db: mongodb.connection.db
 
     server.use passport.initialize()
 
@@ -67,5 +67,5 @@ module.exports = (options, imports, register) ->
       res.json req.user
     
     register null,
-      user: 
+      user:
         model: User

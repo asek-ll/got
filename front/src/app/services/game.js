@@ -1,3 +1,3 @@
-angular.module('tg').factory("GameService", function($resource) {
+angular.module('tg').factory("GameService", ['$resource', function($resource) {
   return $resource("/api/games/:id");
-});
+}]);

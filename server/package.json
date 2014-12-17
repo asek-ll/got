@@ -19,5 +19,10 @@
     "mongoose": "~3.8.18",
     "passport": "^0.2.1",
     "passport-oauth2": "~1.1.2"
+  },
+  "devDependencies": {
+    "grunt-nodemon": "~0.3.0",
+    "grunt": "~0.4.5",
+    "load-grunt-tasks": "~1.0.0"
   }
 }

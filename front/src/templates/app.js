@@ -1,7 +1,9 @@
-angular.module('templates-main', ['app/views/game-form.tpl.html', 'app/views/game-list.tpl.html', 'app/views/home.tpl.html']);
+angular.module('templates-main', ['views/game-form.tpl.html', 'views/game-list.tpl.html', 'views/home.tpl.html', 'views/user.tpl.html']);
 
-angular.module("app/views/game-form.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("app/views/game-form.tpl.html",
+angular.module("views/game-form.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("views/game-form.tpl.html",
+    "<h1>Game creation</h1>\n" +
+    "\n" +
     "<form role=\"form\" name=\"form\">\n" +
     "  <div class=\"form-group\">\n" +
     "    <label for=\"gameName\">Game name</label>\n" +
@@ -24,13 +26,19 @@ angular.module("app/views/game-form.tpl.html", []).run(["$templateCache", functi
     "  </div>\n" +
     " --> \n" +
     "  <button ng-disabled=\"form.$invalid\" ng-click=\"createGame(game)\" type=\"submit\" class=\"btn btn-default\">Submit</button>\n" +
-    "</form>");
+    "</form>\n" +
+    "");
 }]);
 
-angular.module("app/views/game-list.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("app/views/game-list.tpl.html",
-    "<a href=\"games/new\">Create game</a>\n" +
-    "<strong>GAME LIST HERE</strong>\n" +
+angular.module("views/game-list.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("views/game-list.tpl.html",
+    "<h1>Game list</h1>\n" +
+    "<div class=\"btn-toolbar\" role=\"toolbar\">\n" +
+    "  <div class=\"btn-group\" role=\"group\">\n" +
+    "    <a href=\"games/new\" class=\"btn btn-default\">Create game</a>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "\n" +
     "<table class=\"table\">\n" +
     "  <thead>\n" +
     "    <tr>\n" +
@@ -48,8 +56,8 @@ angular.module("app/views/game-list.tpl.html", []).run(["$templateCache", functi
     "");
 }]);
 
-angular.module("app/views/home.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("app/views/home.tpl.html",
+angular.module("views/home.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("views/home.tpl.html",
     "<div class=\"starter-template\">\n" +
     "        <h1>Bootstrap starter template</h1>\n" +
     "        <p class=\"lead\">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>\n" +
@@ -58,4 +66,12 @@ angular.module("app/views/home.tpl.html", []).run(["$templateCache", function($t
     "        </div>\n" +
     "      </div>\n" +
     "      ");
+}]);
+
+angular.module("views/user.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("views/user.tpl.html",
+    "<h1>User</h1>\n" +
+    "\n" +
+    "{{ currentUser.name }}\n" +
+    "");
 }]);

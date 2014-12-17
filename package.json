@@ -14,9 +14,5 @@
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/asek-ll/got/issues"
-  },
-  "dependencies": {
-    "grunt": "~0.4.5",
-    "load-grunt-tasks": "~1.0.0"
   }
 }
