@@ -8,15 +8,22 @@ module.exports = (options, imports, register) ->
 
   server.router.route '/api/games'
   .get (req, res) ->
-    Game.find {}, (err, games) ->
-      res.json _.map games, (game) ->
-         game.toObject()
+    Game.find {}
+      .populate 'owner'
+      .exec (err, games) ->
+        res.json _.map games, (game) ->
+           game.toObject()
 
   .post (req, res, next) ->
     gameData = req.body
 
     if req.hasPerm 'create game'
       gameData.status = "New"
+      
+      _.extend gameData,
+        status: "New"
+        owner: req.user._id
+
       game = new Game gameData
       return game.save ->
         res.json game.toObject()

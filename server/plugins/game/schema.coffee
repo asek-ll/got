@@ -1,4 +1,6 @@
 module.exports = (mongoose) ->
+  ObjectId = mongoose.Schema.Types.ObjectId
+
   Game = mongoose.Schema
     name: String
 
@@ -8,5 +10,9 @@ module.exports = (mongoose) ->
 
     status:
       type: String
+
+    owner:
+      type: ObjectId
+      ref: 'User'
 
   mongoose.model 'Game', Game

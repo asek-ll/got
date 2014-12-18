@@ -42,14 +42,20 @@ angular.module("views/game-list.tpl.html", []).run(["$templateCache", function($
     "<table class=\"table\">\n" +
     "  <thead>\n" +
     "    <tr>\n" +
-    "      <th>Id</th>\n" +
-    "      <th>name</th>\n" +
+    "      <th>Name</th>\n" +
+    "      <th>Created</th>\n" +
+    "      <th>Status</th>\n" +
+    "      <th>Owner</th>\n" +
     "    </tr>\n" +
     "  </thead>\n" +
     "  <tbody>\n" +
     "    <tr ng-repeat=\"game in games\">\n" +
-    "      <td ng-bind=\"game._id\"></td>\n" +
-    "      <td ng-bind=\"game.name\"></td>\n" +
+    "      <td>\n" +
+    "        <a href=\"/game/{{ game._id }}\" ng-bind=\"game.name\"></a>\n" +
+    "      </td>\n" +
+    "      <td ng-bind=\"game.created | date:'medium'\"></td>\n" +
+    "      <td ng-bind=\"game.status\"></td>\n" +
+    "      <td ng-bind=\"game.owner.name\"></td>\n" +
     "    </tr>\n" +
     "  </tbody>\n" +
     "</table>\n" +

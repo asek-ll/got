@@ -29,6 +29,6 @@ module.exports = (options, imports, register) ->
     if req.user
       req.user.perms = perms
     
-    next() 
+    next()
     
   register null, {}
