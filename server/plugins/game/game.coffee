@@ -18,8 +18,6 @@ module.exports = (options, imports, register) ->
     gameData = req.body
 
     if req.hasPerm 'create game'
-      gameData.status = "New"
-      
       _.extend gameData,
         status: "New"
         owner: req.user._id
@@ -33,6 +31,9 @@ module.exports = (options, imports, register) ->
   server.router.route '/api/games/:id'
   .get (req, res) ->
     res.json {}
-      
+
+  server.router.route '/api/games/:id/join'
+  .get (req, res) ->
+    res.join {}
       
   register null, {}
