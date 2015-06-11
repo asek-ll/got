@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('tg', [
-  'templates-main',
+  'app-templates',
   'ngRoute',
   'btford.socket-io',
   'ngResource'
