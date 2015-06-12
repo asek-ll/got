@@ -1,13 +1,12 @@
-/* global angular */
-angular.module('tg', [
+angular.module 'tg', [
   'app-templates',
   'ngRoute',
   'btford.socket-io',
   'ngResource'
-]).config(['$routeProvider', '$locationProvider',
-  function($routeProvider, $locationProvider) {
+]
+.config ($routeProvider, $locationProvider) ->
 
-    $locationProvider.html5Mode(true).hashPrefix('!');
+    $locationProvider.html5Mode(true).hashPrefix('!')
 
     $routeProvider.when('/games', {
       templateUrl: 'views/game-list.tpl.html',
@@ -23,6 +22,4 @@ angular.module('tg', [
       controller: 'MainCtrl'
     }).otherwise({
       redirectTo: '/'
-    });
-  }
-]);
+    })
