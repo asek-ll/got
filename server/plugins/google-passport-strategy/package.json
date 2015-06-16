@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "plugin": {
-    "provides": ["google-strategy"]
+    "consumes": ["server", "user", "passport"],
+    "provides": []
   }
 }

@@ -1,34 +1,19 @@
 module.exports = (options, imports, register) ->
     
   server = imports.server
-  _ = require 'lodash'
-  
-  roleCache =
-      anonymouse: ['view games']
-      admin: ['create game', 'view games']
-  
-  getPermForRole = (role) ->
-      roleCache[role]
-      
-  getPermsForRoles = (roles) ->
-    _.reduce roles, (perms, role) ->
-      perms.concat getPermForRole role
-    , []
-  
-  server.use (req, res, next) ->
-    if req.user
-      roles = req.user.roles
-    else
-      roles = ['anonymouse']
+  ConnectRoles = require 'connect-roles'
 
-    perms = getPermsForRoles roles
+  roles = new ConnectRoles {}
+
+  roles.use 'create game', (req) ->
+    req.user.role == 'admin'
+
+  roles.use (req, action) ->
+    if not req.isAuthenticated()
+      action == 'view game'
+
+  server.use (roles.middleware())
     
-    req.hasPerm = (perm) ->
-      perms.indexOf(perm) >= 0
-      
-    if req.user
-      req.user.perms = perms
-    
-    next()
-    
-  register null, {}
+  register null,
+    roles:
+      user: roles

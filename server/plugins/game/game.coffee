@@ -1,32 +1,30 @@
 module.exports = (options, imports, register) ->
 
   mongodb = imports.mongodb
+  user = imports.roles.user
   server = imports.server
   _ = require 'lodash'
 
   Game = (require __dirname + '/schema.coffee')(mongodb.mongoose)
 
   server.router.route '/api/games'
-  .get (req, res) ->
+  .get user.can('view game'), (req, res) ->
     Game.find {}
       .populate 'owner'
       .exec (err, games) ->
         res.json _.map games, (game) ->
            game.toObject()
 
-  .post (req, res, next) ->
-    gameData = req.body
+  .post user.can('create game'), (req, res, next) ->
 
-    if req.hasPerm 'create game'
-      _.extend gameData,
-        status: "New"
-        owner: req.user._id
+    gameData = _.extend req.body,
+      status: "New"
+      owner: req.user._id
 
-      game = new Game gameData
-      return game.save ->
-        res.json game.toObject()
+    game = new Game gameData
 
-    res.status(403).end()
+    return game.save ->
+      res.json game.toObject()
     
   server.router.route '/api/games/:id'
   .get (req, res) ->
