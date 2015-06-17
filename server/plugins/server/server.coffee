@@ -9,11 +9,6 @@ module.exports = (options, imports, register) ->
     
     router = express.Router()
     
-    #setInterval (->
-        #app.io.broadcast('hey', {this: 'goes to everyone!'})
-        #console.log 'broad'
-    #), 5000
-
     app.use(express.static(path.join(options.root)))
     
     bodyParser = require 'body-parser'
@@ -25,7 +20,6 @@ module.exports = (options, imports, register) ->
       app.use.apply app, arguments
 
     start = ->
-    
 
       app.use router
       

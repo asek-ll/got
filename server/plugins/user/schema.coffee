@@ -19,7 +19,7 @@ module.exports = (mongoose) ->
   User.pre 'save', (next) ->
     user = this
 
-    if not user.isModified password
+    if not user.isModified 'password'
       return next()
 
     bcrypt.genSalt SALT_WORK_FACTOR, (err, salt) ->
@@ -33,11 +33,13 @@ module.exports = (mongoose) ->
         user.password = hash
         next()
 
-  User.methods.comparePassword = (candidatePassword, cb) ->
-    bcrypt.compare candidatePassword, this.password, (err, isMatch) ->
-      if err
-        return cb(err)
+  User.methods.comparePassword = (candidatePassword, next) ->
+    bcrypt.compare candidatePassword, this.password, next
 
-      cb(null, isMatch)
+  User.options.toObject = {}
+  User.options.toObject.transform = (doc, ret, options) ->
+    delete ret.password
+    delete ret.__v
+    ret
 
   mongoose.model 'User', User

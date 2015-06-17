@@ -10,6 +10,6 @@
   "license": "ISC",
   "plugin": {
     "consumes": ["server","mongodb"],
-    "provides": []
+    "provides": ["session"]
   }
 }

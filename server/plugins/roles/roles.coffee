@@ -6,11 +6,13 @@ module.exports = (options, imports, register) ->
   roles = new ConnectRoles {}
 
   roles.use 'create game', (req) ->
-    req.user.role == 'admin'
+    req.user.roles.indexOf('admin') >= 0
 
   roles.use (req, action) ->
     if not req.isAuthenticated()
-      action == 'view game'
+      return action == 'view game'
+    
+    true
 
   server.use (roles.middleware())
     

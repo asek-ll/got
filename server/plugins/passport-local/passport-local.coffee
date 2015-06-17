@@ -1,12 +1,11 @@
 module.exports =  (options, imports, register) ->
 
-  passport = require 'passport'
   LocalStrategy = require('passport-local').Strategy
   User = imports.user.model
+  passport = imports.passport
   server = imports.server
 
   strategy = new LocalStrategy (username, password, done) ->
-    console.log 'execute', username, password
     User.findOne
       username: username
     ,(err, user) ->
@@ -16,10 +15,11 @@ module.exports =  (options, imports, register) ->
       if !user
         return done null, false, message: 'Incorrect username.'
 
-      if !user.checkPassword password
-        return done null, false, message: 'Incorrect password.'
+      user.comparePassword password, (err, isMatch) ->
+        if err or not isMatch
+          return done null, false, message: 'Incorrect password.'
 
-      done null, user
+        done null, user
 
   passport.use strategy
 
@@ -27,5 +27,5 @@ module.exports =  (options, imports, register) ->
     res.json req.user
 
   server.router.post '/auth/local', passport.authenticate('local'), callback
-  register null,
-    'passport-local': {}
+
+  register null, {}

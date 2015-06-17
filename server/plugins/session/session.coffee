@@ -15,3 +15,6 @@ module.exports = (options, imports, register) ->
   server.router.get '/user', (req, res, next) ->
     res.json req.user
     
+  register null,
+    session: {}
+

@@ -9,6 +9,7 @@ module.exports = (options, imports, register) ->
 
   passport.deserializeUser (id, done) ->
     User.findById id, (err, user) ->
+      console.log(arguments,'des')
       if user
         done err, user.toObject()
       else
