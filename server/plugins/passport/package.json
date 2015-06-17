@@ -1,15 +1,15 @@
 {
-  "name": "user",
-  "version": "0.0.0",
+  "name": "passport",
+  "version": "1.0.0",
   "description": "",
-  "main": "user.coffee",
+  "main": "passport.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "plugin": {
-    "consumes": ["mongodb"],
-    "provides": ["user"]
+    "consumes": ["server", "user", "session"],
+    "provides": ["passport"]
   }
 }

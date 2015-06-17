@@ -9,6 +9,6 @@
   "author": "",
   "license": "BSD-2-Clause",
   "plugin": {
-    "consumes": ["server", "mongodb"]
+    "consumes": ["server", "mongodb", "roles"]
   }
 }

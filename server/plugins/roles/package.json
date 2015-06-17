@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "plugin": {
-    "consumes": ["server", "user"]
+    "provided": ["roles"],
+    "consumes": ["server"]
   }
 }
