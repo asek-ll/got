@@ -1,4 +1,4 @@
-angular.module('tg').factory 'AuthService', ($http) ->
+angular.module('tg').factory 'AuthService', ($http, $q) ->
   currentUser = undefined
 
   requestCurrentUser = ->
@@ -10,6 +10,19 @@ angular.module('tg').factory 'AuthService', ($http) ->
 
   {
     login: (user) ->
+      deferred = $q.defer()
+      $http.post '/auth/local', user
+        .success (data, status, headers, config) ->
+          if status == 200
+            currentUser = data
+            deferred.resolve()
+          else
+            deferred.reject()
+        .error ->
+          deferred.reject()
+
+      deferred.promise
+
     logout: ->
     isLoggedIn: ->
       !!currentUser

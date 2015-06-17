@@ -1,0 +1,13 @@
+<h1>Login</h1>
+
+<form role="form" name="form" ng-class="{'has-error': error}">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="input" class="form-control" id="username" ng-model="user.username" required="true" placeholder="Enter name">
+  </div>
+  <div class="form-group" ng-class="{'has-error': error}">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" ng-model="user.password" required="true" placeholder="Password">
+  </div>
+  <button ng-disabled="form.$invalid" type="submit" class="btn btn-default" ng-click="login(user)">Submit</button>
+</form>

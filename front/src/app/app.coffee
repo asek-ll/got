@@ -20,6 +20,9 @@ angular.module 'tg', [
     }).when('/', {
       templateUrl: 'views/home.tpl.html',
       controller: 'MainCtrl'
+    }).when('/login', {
+      templateUrl: 'components/login/loginView.tpl.html',
+      controller: 'LoginCtrl'
     }).otherwise({
       redirectTo: '/'
     })

@@ -5,7 +5,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     nodemon: {
       dev: {
-        script: './server.coffee'
+        script: './server.coffee',
+        options: {
+          nodeArgs: ['--nodejs', '--debug']
+        }
       }
     }
   });

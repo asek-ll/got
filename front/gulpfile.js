@@ -27,21 +27,21 @@ var src = {
 
 gulp.task('clean', function() {
   return gulp.src(dist, {
-      read: false
-    })
-    .pipe(clean());
+    read: false
+  })
+  .pipe(clean());
 });
 
 var getTemplateStream = function(isDev) {
   var templateStream = gulp.src(src.templates)
-    .pipe(ngHtml2Js({
-      moduleName: 'app-templates'
-    }));
+  .pipe(ngHtml2Js({
+    moduleName: 'app-templates'
+  }));
 
   if (!isDev) {
     templateStream = templateStream
-      .pipe(concat('partials.js'))
-      .pipe(uglify());
+    .pipe(concat('partials.js'))
+    .pipe(uglify());
   }
 
   return templateStream.pipe(gulp.dest(dist + '/partials'));
@@ -49,10 +49,10 @@ var getTemplateStream = function(isDev) {
 
 var getScriptStream = function(isDev) {
   var appStream = gulp.src(src.coffee)
-    .pipe(sourcemaps.init())
-    .pipe(coffee({
-      bare: true
-    }));
+  .pipe(sourcemaps.init())
+  .pipe(coffee({
+    bare: true
+  }));
 
   if (isDev) {
     appStream = appStream.pipe(sourcemaps.write());
@@ -60,8 +60,8 @@ var getScriptStream = function(isDev) {
 
   if (!isDev) {
     appStream = appStream
-      .pipe(concat('app.js'))
-      .pipe(uglify());
+    .pipe(concat('app.js'))
+    .pipe(uglify());
   }
 
   return appStream.pipe(gulp.dest(dist + '/scripts/app'));
@@ -71,8 +71,8 @@ var getStyleStream = function(isDev) {
   var appCssStream = gulp.src(src.css);
   if (!isDev) {
     appCssStream = appCssStream
-      .pipe(concat('style.css'))
-      .pipe(minifyCss());
+    .pipe(concat('style.css'))
+    .pipe(minifyCss());
   }
 
   return appCssStream.pipe(gulp.dest(dist + '/styles'));
@@ -84,8 +84,8 @@ var getVendorResources = function(isDev) {
 
   if (!isDev) {
     vendorStream = vendorStream
-      .pipe(concat('vendors.js'))
-      .pipe(uglify());
+    .pipe(concat('vendors.js'))
+    .pipe(uglify());
   }
 
   return vendorStream.pipe(gulp.dest(dist + '/scripts/vendor'));
@@ -93,11 +93,11 @@ var getVendorResources = function(isDev) {
 
 var getBootstrapStyles = function() {
   return gulp.src('src/styles/bootstrap/bootstrap.less')
-    .pipe(less({
-      strictMath: true,
-      paths: ['node_modules/bootstrap/less']
-    }))
-    .pipe(gulp.dest(dist + '/styles'));
+  .pipe(less({
+    strictMath: true,
+    paths: ['node_modules/bootstrap/less']
+  }))
+  .pipe(gulp.dest(dist + '/styles'));
 };
 
 gulp.task('dev-html', ['clean'], function() {
@@ -110,11 +110,11 @@ gulp.task('dev-html', ['clean'], function() {
   var bootstrapCss = getBootstrapStyles();
 
   return gulp.src(src.html)
-    .pipe(inject(series(vendorStream, templateStream, appStream, appCssStream, bootstrapCss), {
-      relative: true,
-      ignorePath: '../dist'
-    }))
-    .pipe(gulp.dest(dist));
+  .pipe(inject(series(vendorStream, templateStream, appStream, appCssStream, bootstrapCss), {
+    relative: true,
+    ignorePath: '../dist'
+  }))
+  .pipe(gulp.dest(dist));
 });
 
 gulp.task('html', ['clean'], function() {
@@ -127,47 +127,69 @@ gulp.task('html', ['clean'], function() {
   var bootstrapCss = getBootstrapStyles();
 
   return gulp.src(src.html)
-    .pipe(inject(series(vendorStream, templateStream, appStream, appCssStream, bootstrapCss), {
-      relative: true,
-      ignorePath: '../dist'
-    }))
-    .pipe(minifyHtml())
-    .pipe(gulp.dest(dist));
+  .pipe(inject(series(vendorStream, templateStream, appStream, appCssStream, bootstrapCss), {
+    relative: true,
+    ignorePath: '../dist'
+  }))
+  .pipe(minifyHtml())
+  .pipe(gulp.dest(dist));
 });
+
+var isHtmlRebuiliding = false;
+var rebuildHtml = function () {
+  if ( isHtmlRebuiliding ) {
+    return false;
+  }
+
+  isHtmlRebuiliding = true;
+  gulp.start('dev-html', function () {
+    isHtmlRebuiliding = false;
+  });
+};
 
 gulp.task('watch', ['dev-html'], function() {
 
   watch(src.html, function() {
-    gulp.start('dev-html');
+    rebuildHtml();
   });
 
   watch(src.coffee, function(file) {
+    if ( file.event !== 'change' ) {
+      return rebuildHtml();
+    }
 
     gulp.src(src.coffee)
-      .pipe(watch(src.coffee))
-      .pipe(sourcemaps.init())
-      .pipe(coffee({
-        bare: true
-      }))
-      .pipe(sourcemaps.write())
-      .pipe(gulp.dest(dist + '/scripts/app'));
+    .pipe(watch(src.coffee))
+    .pipe(sourcemaps.init())
+    .pipe(coffee({
+      bare: true
+    }))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(dist + '/scripts/app'));
   });
 
   watch(src.css, function(file) {
+    if ( file.event !== 'change' ) {
+      return rebuildHtml();
+    }
 
     gulp.src(src.css)
-      .pipe(watch(src.css))
-      .pipe(gulp.dest(dist + '/styles'));
+    .pipe(watch(src.css))
+    .pipe(gulp.dest(dist + '/styles'));
   });
 
   watch(src.templates, function(file) {
 
+    if ( file.event !== 'change' ) {
+      return rebuildHtml();
+    }
+
     var templateStream = gulp.src(src.templates)
-      .pipe(watch(src.templates))
-      .pipe(ngHtml2Js({
-        moduleName: 'app-templates'
-      }))
-      .pipe(gulp.dest(dist + '/partials'));
+    .pipe(watch(src.templates))
+    .pipe(ngHtml2Js({
+      moduleName: 'app-templates'
+    }))
+    .pipe(gulp.dest(dist + '/partials'));
   });
 
 });
